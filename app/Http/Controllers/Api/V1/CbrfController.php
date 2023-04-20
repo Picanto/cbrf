@@ -10,6 +10,6 @@ class CbrfController extends Controller
 {
     //
     public function index() {
-        return Cbrf::all();
+        return 1; // Cbrf::all();
     }
 }

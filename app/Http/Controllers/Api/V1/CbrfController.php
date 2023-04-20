@@ -321,7 +321,7 @@ class CbrfController extends Controller
 
         $array = json_decode($json,TRUE);
 
-        return $array;
+        return $array['attributes'];
 
         // return 1; // Cbrf::all();
     }

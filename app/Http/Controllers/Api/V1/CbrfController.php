@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cbrf;
 use App\Models\Valutes;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class CbrfController extends Controller
@@ -28,17 +29,33 @@ class CbrfController extends Controller
 
         $all_valute_array = $cbr->xmlToJson($xml);
 
-        $valutes = new Valutes();
-        $valutes->charcode = 'USD';
-        $valutes->value = '132,9581';
+        if($save === 'true') {
 
-        $valutes->date = Carbon::createFromFormat('d/m/Y', $date);
+//            var_dump($all_valute_array);
+//            exit();
 
-        $valutes->uid = md5($date);
-        // return $valutes->getTable();
-        $valutes->save();
+            $valutes_array = $cbr->getValute($valute, $all_valute_array);
 
-        return $cbr->getValute($valute, $all_valute_array);
+            // if(!is_null($valutes_array)) {
+
+                foreach($cbr->getValute($valute, $all_valute_array) as $item) {
+
+//                var_dump($item);
+
+                    $valutes = new Valutes();
+                    // echo $item['CharCode'] . ' ' . $item['Value'];
+                    $valutes->charcode = $item['CharCode'];
+                    $valutes->value = $item['Value'];
+                    $valutes->date = Carbon::createFromFormat('d/m/Y', $date);
+                    $valutes->uid = md5($date);
+                    // return $valutes->getTable();
+                    $valutes->save();
+                }
+
+//            exit();
+            // }
+
+        }
 
     }
 }

@@ -35,33 +35,33 @@ class cbr {
 
     public function getValute($name, $array) {
 
-        if(is_null($name) || $name === 'all') {
+        $all_valutes = [];
 
-            $all_valutes = [];
+        if(is_null($name) || $name === 'all') {
 
             foreach($array as $item) {
                 $all_valutes[] = ['CharCode' => $item['CharCode'],
-                    'Name'  => $item['Name'],
-                    'Value' => $item['Value'],
-                    'Date'  => $this->date
+                                  'Name'  => $item['Name'],
+                                  'Value' => $item['Value'],
+                                  'Date'  => $this->date
                 ];
             }
-
-            return $all_valutes;
 
         }
 
         foreach($array as $item) {
 
             if($item['CharCode'] === $name) {
-                return ['CharCode' => $item['CharCode'],
-                        'Name'  => $item['Name'],
-                        'Value' => $item['Value'],
-                        'Date'  => $this->date
+                $all_valutes[] = ['CharCode' => $item['CharCode'],
+                                  'Name'  => $item['Name'],
+                                  'Value' => $item['Value'],
+                                  'Date'  => $this->date
                 ];
             }
 
         }
+
+        return $all_valutes;
 
     }
 

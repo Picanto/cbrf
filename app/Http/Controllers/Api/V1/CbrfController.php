@@ -21,24 +21,11 @@ class CbrfController extends Controller
         $save = $cbrDto->getSave();
         $comment = $cbrDto->getComment();
 
-//        var_dump($date);
-//        var_dump($valute);
-//        exit();
-
-//        $valute = $get_params['valute'];
-//        $date = $get_params['date'];
-//
         $cbr = new cbr($date);
-//
         $xml = $cbr->getCbrXml();
 
-//        var_dump($xml);
-//        exit();
-//
         $all_valute_array = $cbr->xmlToJson($xml);
 
-//        return $all_valute_array;
-//
         return $cbr->getValute($valute, $all_valute_array);
 
     }

@@ -34,7 +34,19 @@ class cbr {
     public function getValute($name, $array) {
 
         if(is_null($name) || $name === 'all') {
-            return $array;
+
+            $all_valutes = [];
+
+            foreach($array as $item) {
+                $all_valutes[] = ['CharCode' => $item['CharCode'],
+                    'Name'  => $item['Name'],
+                    'Value' => $item['Value'],
+                    'Date'  => $this->date
+                ];
+            }
+
+            return $all_valutes;
+
         }
 
         foreach($array as $item) {

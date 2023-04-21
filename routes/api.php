@@ -21,5 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // api/v1
 Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function() {
-    Route::apiResource('cbrves',CbrfController::class);
+    Route::apiResource('valutes',CbrfController::class);
 });

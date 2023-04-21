@@ -4,7 +4,7 @@ namespace App\cbr;
 
 class cbr {
 
-    private $cbr_xml = 'https://www.cbr.ru/scripts/XML_daily.asp?date_req='; // 20/04/2023
+    private $cbr_xml = 'https://www.cbr.ru/scripts/XML_daily.asp?date_req=';
     private $date;
 
     public function __construct($date) {

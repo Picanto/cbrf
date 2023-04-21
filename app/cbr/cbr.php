@@ -2,8 +2,6 @@
 
 namespace App\cbr;
 
-use function Monolog\toArray;
-
 class cbr {
 
     private $cbr_xml = 'https://www.cbr.ru/scripts/XML_daily.asp?date_req='; // 20/04/2023

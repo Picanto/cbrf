@@ -63,6 +63,4 @@ class cbr {
 
     }
 
-    // public function
-
 }

@@ -9,29 +9,22 @@ use Illuminate\Http\Request;
 
 class CbrfController extends Controller
 {
-    //
-    public function index() {
+    public function index(Request $request) {
 
-        $cbr = new cbr();
+        $get_params = $request->query();
 
-        $xml = $cbr->getCbrXml('20/04/2023');
+        $valute = $get_params['valute'];
+        $date = $get_params['date'];
+
+        $cbr = new cbr('10/03/2022');
+
+        $xml = $cbr->getCbrXml();
+
+        $all_valute_array = $cbr->xmlToJson($xml);
+
+        return $cbr->getValute($valute, $all_valute_array);
 
         return $cbr->xmlToJson($xml);
 
-//        $xml_string = file_get_contents('https://www.cbr.ru/scripts/XML_daily.asp?date_req=20/04/2023');
-//
-//        $xml = simplexml_load_string($xml_string);
-//
-//        $json = json_encode($xml);
-//
-//        $array = json_decode($json,TRUE);
-//
-//        $count = count($array['Valute']);
-//
-//        return $array['Valute'];
-
-        // return $array['Valute'][$count-1];
-
-        // return 1; // Cbrf::all();
     }
 }

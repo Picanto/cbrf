@@ -5,13 +5,18 @@ namespace App\cbr;
 class cbr {
 
     private $cbr_xml = 'https://www.cbr.ru/scripts/XML_daily.asp?date_req='; // 20/04/2023
+    private $date;
 
-    public function __construct() {
-
+    public function __construct($date) {
+        $this->date = $date;
     }
 
-    public function getCbrXml($date) {
-        $full_url = $this->cbr_xml . $date;
+    private function getDate() {
+        return $this->date;
+    }
+
+    public function getCbrXml() {
+        $full_url = $this->cbr_xml . $this->getDate();
         $xml_string = file_get_contents($full_url);
         return $xml_string;
     }
@@ -24,6 +29,22 @@ class cbr {
         return $json['Valute'];
 
         // return $json['Valute'][0]['CharCode'] . $json['Valute'][0]['Name'] . $json['Valute'][0]['Value'];
+    }
+
+    public function getValute($name, $array) {
+
+        if(is_null($name) || $name === 'all') {
+            return $array;
+        }
+
+        foreach($array as $item) {
+
+            if($item['CharCode'] === $name) {
+                return ['CharCode' => $item['CharCode'], 'Name' => $item['Name'], 'Value' => $item['Value']];
+            }
+
+        }
+
     }
 
 }

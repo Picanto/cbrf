@@ -40,11 +40,17 @@ class cbr {
         foreach($array as $item) {
 
             if($item['CharCode'] === $name) {
-                return ['CharCode' => $item['CharCode'], 'Name' => $item['Name'], 'Value' => $item['Value']];
+                return ['CharCode' => $item['CharCode'],
+                        'Name'  => $item['Name'],
+                        'Value' => $item['Value'],
+                        'Date'  => $this->date
+                ];
             }
 
         }
 
     }
+
+    // public function
 
 }

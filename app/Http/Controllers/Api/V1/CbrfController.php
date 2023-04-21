@@ -16,15 +16,13 @@ class CbrfController extends Controller
         $valute = $get_params['valute'];
         $date = $get_params['date'];
 
-        $cbr = new cbr('10/03/2022');
+        $cbr = new cbr($date);
 
         $xml = $cbr->getCbrXml();
 
         $all_valute_array = $cbr->xmlToJson($xml);
 
         return $cbr->getValute($valute, $all_valute_array);
-
-        return $cbr->xmlToJson($xml);
 
     }
 }

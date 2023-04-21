@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('valutes', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('charcode');
             $table->string('value');
             $table->date('date');
             $table->string('uid');
-            // $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
-            // $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 

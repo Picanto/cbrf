@@ -31,29 +31,19 @@ class CbrfController extends Controller
 
         if($save === 'true') {
 
-//            var_dump($all_valute_array);
-//            exit();
+            foreach($cbr->getValute($valute, $all_valute_array) as $item) {
 
-            $valutes_array = $cbr->getValute($valute, $all_valute_array);
 
-            // if(!is_null($valutes_array)) {
-
-                foreach($cbr->getValute($valute, $all_valute_array) as $item) {
-
-//                var_dump($item);
-
-                    $valutes = new Valutes();
-                    // echo $item['CharCode'] . ' ' . $item['Value'];
-                    $valutes->charcode = $item['CharCode'];
-                    $valutes->value = $item['Value'];
-                    $valutes->date = Carbon::createFromFormat('d/m/Y', $date);
-                    $valutes->uid = md5($date);
-                    // return $valutes->getTable();
-                    $valutes->save();
-                }
-
-//            exit();
-            // }
+                $valutes = new Valutes();
+                // echo $item['CharCode'] . ' ' . $item['Value'];
+                $valutes->charcode = $item['CharCode'];
+                $valutes->value = $item['Value'];
+                $valutes->date = Carbon::createFromFormat('d/m/Y', $date);
+                $valutes->uid = md5($date.$item['CharCode']);
+                $valutes->comment = $comment;
+                // return $valutes->getTable();
+                $valutes->save();
+            }
 
         }
 

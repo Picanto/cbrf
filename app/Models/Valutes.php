@@ -14,7 +14,10 @@ class Valutes extends Model
         'charcode',
         'value',
         'date',
-        'uid'
+        'uid',
+        'comment',
+        'created_at',
+        'updated_at'
     ];
 
 }

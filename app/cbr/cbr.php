@@ -187,6 +187,10 @@ class cbr {
 
     }
 
+    /**
+     * @param $uid
+     * @param $comment
+     */
     // Метод обновляет (по уникальному идентификатору) комментарий к подборке
     public function updateComment($uid, $comment) {
 

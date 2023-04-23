@@ -2,7 +2,6 @@
 
 namespace App\cbr;
 
-use App\Models\Cbrf;
 use App\Models\Valutes;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -167,7 +166,7 @@ class cbr {
      * @param $valute
      * @return array
      */
-    public function checkInDataBase_2($date, $valute): array {
+    public function checkInDataBase($date, $valute): array {
 
         if(is_null($valute)) {
             $allCodesArray = $this->getAllCodes();
@@ -208,24 +207,49 @@ class cbr {
 
     public function saveToDataBase($valuteArray) {
 
-//        var_dump($valuteArray['CharCode']);
+        $tempArray = [];
+
+//        var_dump('<pre>');
+
+        foreach($valuteArray as $item) {
+
+            if(!empty($item)) {
+                $tempArray[] = $item;
+                // var_dump($item);
+            }
+
+        }
+
+//        var_dump($tempArray);
+
+        $valuteArray = $tempArray;
+
+//        exit();
+//
+//        var_dump('<pre>');
+//        // var_dump($valuteArray);
+//        var_dump(count($valuteArray));
 //        exit();
 
         foreach($valuteArray as $item) {
 
-//            var_dump($item[0]['CharCode']);
+//            $valutes = new Valutes();
+//            $valutes->charcode = $item[0]['CharCode'] ?? null;
+//            $valutes->value = $item[0]['Value'] ?? null;
+//            $valutes->date = Carbon::createFromFormat('d/m/Y', $item[0]['Date'] ?? null);
+//            $valutes->uid = md5($item[0]['Date'].$item[0]['CharCode']);
+//            $valutes->comment = $item[0]['Comment'] ?? null;
+//            $valutes->save();
+
+//            var_dump($item['CharCode']);
 
             $valutes = new Valutes();
-            // echo $item['CharCode'] . ' ' . $item['Value'];
-            $valutes->charcode = $item[0]['CharCode'];
-            $valutes->value = $item[0]['Value'];
-            $valutes->date = Carbon::createFromFormat('d/m/Y', $item[0]['Date']);
-            $valutes->uid = md5($item[0]['Date'].$item[0]['CharCode']);
-            $valutes->comment = $item[0]['Comment'];
-            // return $valutes->getTable();
-             $valutes->save();
-
-            // $uids_array[] = md5($date.$item['CharCode']);
+            $valutes->charcode = $item['CharCode'];
+            $valutes->value = $item['Value'];
+            $valutes->date = Carbon::createFromFormat('d/m/Y', $item['Date']);
+            $valutes->uid = md5($item['Date'].$item['CharCode']);
+            $valutes->comment = $item['Comment'];
+            $valutes->save();
 
         }
 

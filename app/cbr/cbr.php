@@ -96,53 +96,15 @@ class cbr {
 
     }
 
-//    public function checkInDataBase(array $hashIdsArray) {
-//
-//        $uids = DB::table('valutes')->select('uid')->get();
-//
-//        $uidsDbArray = [];
-//
-//        foreach($uids as $item) {
-//            $uidsDbArray[] = $item->uid;
-//        }
-//
-////        var_dump($hashIdsArray);
-////        var_dump($uidsDbArray);
-////        exit();
-//
-//        // $arrayDiff = array_diff($hashIdsArray, $uidsDbArray);
-//
-//        // if(empty($arrayDiff)) {
-//            // $this->getDataFromDataBase($hashIdsArray);
-////            var_dump($this->getDataFromDataBase($hashIdsArray));
-////            exit();
-//        // }
-//
-//        return $this->getDataFromDataBase($hashIdsArray);
-//
-////        return $arrayDiff;
-//
-//    }
-
     /**
      * @param $array
      * @return array
      */
     private function getDataFromDataBase($array): array {
 
-        // $records = DB::table('valutes')->where('uid', '038523354f2e28369d4782726da3b9b9');
-
-        // $records = DB::table('valutes')->select('charcode', 'value', 'date', 'uid', 'comment')->get();
-
-//        var_dump($array);
-//        exit();
-
         $records = DB::table('valutes')
                     ->whereIn('uid', $array)
                     ->get();
-
-//        var_dump($records);
-//        exit();
 
         $resultArray = [];
 
@@ -175,7 +137,6 @@ class cbr {
 
             for($i = 0; $i < count($allCodesArray); $i++) {
                 $uid = md5($date.$allCodesArray[$i]);
-                // var_dump($this->getDataFromDataBase([$uid]));
 
                 $dataFromDataBase = $this->getDataFromDataBase([$uid]);
 
@@ -183,65 +144,36 @@ class cbr {
                     $valutesFromDataBase[] = $dataFromDataBase;
                 }
 
-                // $valutesFromDataBase[] = $this->getDataFromDataBase([$uid]);
-
             }
 
             return $valutesFromDataBase;
 
-//            exit();
         }
-
-//        var_dump($date);
-//        var_dump($valute);
-//        var_dump(md5($date.$valute));
-//        exit();
 
         $uid = md5($date.$valute);
         return $this->getDataFromDataBase([$uid]);
 
-//        var_dump($this->getDataFromDataBase([$uid]));
-//        exit();
-
     }
 
-    public function saveToDataBase($valuteArray) {
+    /**
+     * @param $valuteArray
+     */
+
+    public function saveToDataBase($valuteArray): void {
 
         $tempArray = [];
-
-//        var_dump('<pre>');
 
         foreach($valuteArray as $item) {
 
             if(!empty($item)) {
                 $tempArray[] = $item;
-                // var_dump($item);
             }
 
         }
 
-//        var_dump($tempArray);
-
         $valuteArray = $tempArray;
 
-//        exit();
-//
-//        var_dump('<pre>');
-//        // var_dump($valuteArray);
-//        var_dump(count($valuteArray));
-//        exit();
-
         foreach($valuteArray as $item) {
-
-//            $valutes = new Valutes();
-//            $valutes->charcode = $item[0]['CharCode'] ?? null;
-//            $valutes->value = $item[0]['Value'] ?? null;
-//            $valutes->date = Carbon::createFromFormat('d/m/Y', $item[0]['Date'] ?? null);
-//            $valutes->uid = md5($item[0]['Date'].$item[0]['CharCode']);
-//            $valutes->comment = $item[0]['Comment'] ?? null;
-//            $valutes->save();
-
-//            var_dump($item['CharCode']);
 
             $valutes = new Valutes();
             $valutes->charcode = $item['CharCode'];
@@ -252,8 +184,6 @@ class cbr {
             $valutes->save();
 
         }
-
-//        exit();
 
     }
 

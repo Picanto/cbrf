@@ -8,6 +8,7 @@ class cbrDto {
     private $valute;
     private $save;
     private $comment;
+    private $uid;
 
     /**
      * cbrDto constructor.
@@ -21,6 +22,7 @@ class cbrDto {
         $this->valute = $params['valute'] ?? null;
         $this->save = $params['save'] ?? null;
         $this->comment = $params['comment'] ?? null;
+        $this->uid = $params['uid'] ?? null;
     }
 
     /**
@@ -57,6 +59,11 @@ class cbrDto {
     public function getComment(): string | null
     {
         return $this->comment;
+    }
+
+    public function getUid(): string | null
+    {
+        return $this->uid;
     }
 
 }

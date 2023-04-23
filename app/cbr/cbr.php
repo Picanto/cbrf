@@ -187,4 +187,13 @@ class cbr {
 
     }
 
+    // Метод обновляет (по уникальному идентификатору) комментарий к подборке
+    public function updateComment($uid, $comment) {
+
+        DB::table('valutes')
+            ->where('uid', $uid)
+            ->update(['comment' => $comment]);
+
+    }
+
 }

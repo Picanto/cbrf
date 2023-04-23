@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\CbrfController;
+use App\Http\Controllers\Api\V1\UpdateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // api/v1
 Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function() {
     Route::apiResource('valutes',CbrfController::class);
+    Route::apiResource('update',UpdateController::class);
 });

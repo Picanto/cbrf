@@ -61,6 +61,9 @@ class cbrDto {
         return $this->comment;
     }
 
+    /**
+     * @return string|null
+     */
     public function getUid(): string | null
     {
         return $this->uid;
